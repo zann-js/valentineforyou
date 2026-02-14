@@ -10,10 +10,9 @@
         body {
             margin: 0;
             padding: 0;
-            /* Background diperbesar biar bisa digerakkan */
             background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffd1ff, #fecfef);
             background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite; /* Animasi background */
+            animation: gradientBG 15s ease infinite; 
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -99,7 +98,7 @@
             z-index: 100;
             letter-spacing: 1px;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            margin: 5px; /* Tambahan agar tidak menumpuk saat layar kecil */
+            margin: 5px; 
         }
 
         .btn:active {
@@ -121,17 +120,17 @@
             color: #333;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
-            position: relative; /* Default position */
+            position: relative; 
         }
 
         .buttons {
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-wrap: wrap; /* Agar tombol turun ke bawah jika layar sempit */
+            flex-wrap: wrap; 
             gap: 15px;
             margin-top: 30px;
-            min-height: 60px; /* Menjaga tinggi agar layout stabil */
+            min-height: 60px; 
         }
 
         /* --- PLAYLIST STYLES --- */
@@ -375,6 +374,7 @@
         <br>
         <div style="display: flex; flex-direction: column; gap: 10px;">
             <button class="btn btn-yes" style="background: linear-gradient(45deg, #a18cd1, #fbc2eb);" onclick="showPlaylist()">Songs for You 🎧</button>
+            <button class="btn btn-yes" style="background: linear-gradient(45deg, #1DB954, #1ed760);" onclick="showSpotify()">Spotify Playlist 🟢</button>
             <button class="btn btn-yes" onclick="showLetter()">Kembali ke Surat 💌</button>
         </div>
     </div>
@@ -419,6 +419,20 @@
         
         <br>
         <button class="btn btn-yes" onclick="showGallery()">Kembali 📸</button>
+    </div>
+
+    <div class="container hidden" id="page-spotify">
+        <h1>Our Playlist 🟢</h1>
+        
+        <p style="font-size: 0.95rem; margin-bottom: 20px;">
+            Selamat Hari Valentine, Cayangku! 💖<br>
+            Aku sengaja kumpulin lagu-lagu romantis ini khusus buat nemenin hari kamu. Semoga tiap denger lagu ini, kamu selalu inget betapa sayangnya aku sama kamu. Dengerin yaa! 🥰
+        </p>
+        
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWXbttAJcbphz?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        
+        <br><br>
+        <button class="btn btn-yes" onclick="switchPage('page-spotify', 'page-gallery')">Kembali 📸</button>
     </div>
 
     <script>
@@ -529,10 +543,11 @@
         }
 
         function showLetter() {
-            // Cek dari halaman mana, tutup playlist/galeri/success
+            // Cek dari halaman mana, tutup playlist/galeri/success/spotify
             document.getElementById('page-success').style.display = 'none';
             document.getElementById('page-gallery').style.display = 'none';
             document.getElementById('page-playlist').style.display = 'none';
+            document.getElementById('page-spotify').style.display = 'none'; 
             
             switchPage('page-success', 'page-letter'); // Fallback logic, ID awal gak masalah
         }
@@ -540,12 +555,18 @@
         function showGallery() {
             document.getElementById('page-letter').style.display = 'none';
             document.getElementById('page-playlist').style.display = 'none';
+            document.getElementById('page-spotify').style.display = 'none'; 
             switchPage('page-letter', 'page-gallery');
         }
 
         function showPlaylist() {
             document.getElementById('page-gallery').style.display = 'none';
             switchPage('page-gallery', 'page-playlist');
+        }
+
+        function showSpotify() {
+            document.getElementById('page-gallery').style.display = 'none';
+            switchPage('page-gallery', 'page-spotify');
         }
 
         // --- 4. EFEK VISUAL ---
